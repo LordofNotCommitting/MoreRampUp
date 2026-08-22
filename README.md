@@ -11,3 +11,9 @@ This mod Update Ramp up so it can last multiple AP. Duration stacking option, an
 
 Also check out my other mod that disables heavy effect.
 https://steamcommunity.com/sharedfiles/filedetails/?id=3601102970
+
+Changelog:
+
+v1.01:
+
+Ok, so duration is sometimes too long and fire rate too high to sustain. Added limitation for both in MCM Menu.

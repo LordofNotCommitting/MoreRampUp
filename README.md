@@ -14,6 +14,10 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3601102970
 
 Changelog:
 
+v1.02:
+
+I had better idea. Just set Fire Rate = Duration of Ramp Up. Such option is also added.
+
 v1.01:
 
 Ok, so duration is sometimes too long and fire rate too high to sustain. Added limitation for both in MCM Menu.

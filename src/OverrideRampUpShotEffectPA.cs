@@ -23,6 +23,9 @@ namespace MoreRampUp
         static int RU_Duration_Set = Plugin.ConfigGeneral.ModData.GetConfigValue<int>("RU_Duration_Set", ModConfigGeneral.RU_Duration_Set_Array[0]);
         static int RU_Additional_Shot = Plugin.ConfigGeneral.ModData.GetConfigValue<int>("RU_Additional_Shot", ModConfigGeneral.RU_Additional_Shot_Array[0]);
 
+        static int RU_Duration_Limit = Plugin.ConfigGeneral.ModData.GetConfigValue<int>("RU_Duration_Limit", ModConfigGeneral.RU_Duration_Limit_Array[0]);
+        static int RU_Additional_Shot_Limit = Plugin.ConfigGeneral.ModData.GetConfigValue<int>("RU_Additional_Shot_Limit", ModConfigGeneral.RU_Additional_Shot_Limit_Array[0]);
+
         
         static public int temp_ap_count = 1;
         static public bool turn_skip_factor = false;
@@ -49,6 +52,20 @@ namespace MoreRampUp
             __instance.AmmoValue = (float)Mathf.RoundToInt(__instance.AmmoValue + RU_Additional_Shot);
             //this is visual and therefore we do not need
             //__instance.OriginalDuration = scaledDuration;
+
+            //limitation enforcement
+            if (__instance.AmmoValue > RU_Additional_Shot_Limit)
+            {
+                __instance.AmmoValue = (float)RU_Additional_Shot_Limit;
+            }
+            int temp_dur_count = (RU_Duration_Limit + 2);
+
+            if (__instance.Duration > temp_dur_count)
+            {
+                __instance.Duration = temp_dur_count;
+            }
+
+
         }
         private static readonly FieldInfo CreatureField = AccessTools.Field(typeof(RampUpShotEffect), "_creature");
 
@@ -96,9 +113,23 @@ namespace MoreRampUp
                 __instance.Duration = (RU_Duration_Set + 2);
             }
 
+            
+
             // Handle AmmoValue stacking from original code
             __instance.AmmoValue = (float)Mathf.RoundToInt(__instance.AmmoValue + rampUpShotEffect.AmmoValue);
             // Return false to skip original Merge logic since we completely handled it
+
+            if (__instance.AmmoValue > RU_Additional_Shot_Limit)
+            {
+                __instance.AmmoValue = (float)RU_Additional_Shot_Limit;
+            }
+            int temp_dur_count = (RU_Duration_Limit + 2);
+
+            if (__instance.Duration > temp_dur_count)
+            {
+                __instance.Duration = temp_dur_count;
+            }
+
             return false;
         }
 

@@ -26,12 +26,15 @@ namespace MoreRampUp
         static int RU_Duration_Limit = Plugin.ConfigGeneral.ModData.GetConfigValue<int>("RU_Duration_Limit", ModConfigGeneral.RU_Duration_Limit_Array[0]);
         static int RU_Additional_Shot_Limit = Plugin.ConfigGeneral.ModData.GetConfigValue<int>("RU_Additional_Shot_Limit", ModConfigGeneral.RU_Additional_Shot_Limit_Array[0]);
 
+
+        static bool RU_Additional_Shot_Duration_Sync_Bool = Plugin.ConfigGeneral.ModData.GetConfigValue<bool>("RU_Additional_Shot_Duration_Sync_Bool", false);
         
         static public int temp_ap_count = 1;
         static public bool turn_skip_factor = false;
         static public bool const_factor = false;
 
         private const int DecrementEveryXCalls = 2;
+
 
 
         // Define your scale factor here (e.g., x = 3 means +4 duration added so net is +3)
@@ -54,15 +57,22 @@ namespace MoreRampUp
             //__instance.OriginalDuration = scaledDuration;
 
             //limitation enforcement
-            if (__instance.AmmoValue > RU_Additional_Shot_Limit)
-            {
-                __instance.AmmoValue = (float)RU_Additional_Shot_Limit;
-            }
+
             int temp_dur_count = (RU_Duration_Limit + 2);
 
             if (__instance.Duration > temp_dur_count)
             {
                 __instance.Duration = temp_dur_count;
+            }
+
+            if (RU_Additional_Shot_Duration_Sync_Bool) 
+            {
+                //Plugin.Logger.Log("aaaa" + temp_dur_count);
+                __instance.AmmoValue = (float)(__instance.Duration - 2f);
+            }
+            else if (__instance.AmmoValue > RU_Additional_Shot_Limit)
+            {
+                __instance.AmmoValue = (float)RU_Additional_Shot_Limit;
             }
 
 
@@ -82,6 +92,10 @@ namespace MoreRampUp
             {
                 __instance.Duration = 0;
             }
+            if (RU_Additional_Shot_Duration_Sync_Bool&& __instance.AmmoValue > 0)
+            {
+                __instance.AmmoValue = __instance.Duration - 2f;
+            }
 
             //Plugin.Logger.Log("__instance.Duration:" + __instance.Duration);
             __instance.OriginalDuration = __instance.Duration;
@@ -94,7 +108,7 @@ namespace MoreRampUp
         {
 
             RampUpShotEffect rampUpShotEffect = other as RampUpShotEffect;
-            if (rampUpShotEffect == null) return true;
+            if (rampUpShotEffect == null) return false;
 
             if (RU_Stack_Per_Proc_Bool)
             {
@@ -118,16 +132,20 @@ namespace MoreRampUp
             // Handle AmmoValue stacking from original code
             __instance.AmmoValue = (float)Mathf.RoundToInt(__instance.AmmoValue + rampUpShotEffect.AmmoValue);
             // Return false to skip original Merge logic since we completely handled it
-
-            if (__instance.AmmoValue > RU_Additional_Shot_Limit)
-            {
-                __instance.AmmoValue = (float)RU_Additional_Shot_Limit;
-            }
             int temp_dur_count = (RU_Duration_Limit + 2);
 
             if (__instance.Duration > temp_dur_count)
             {
                 __instance.Duration = temp_dur_count;
+            }
+
+            if (RU_Additional_Shot_Duration_Sync_Bool)
+            {
+                __instance.AmmoValue = __instance.Duration - 2f;
+            }
+            else if (__instance.AmmoValue > RU_Additional_Shot_Limit)
+            {
+                __instance.AmmoValue = (float)RU_Additional_Shot_Limit;
             }
 
             return false;

@@ -34,7 +34,11 @@ namespace MoreRampUp
             this.ModData.AddConfigValue("Ramp Up Fire Rate Settings", "RU_Additional_Shot_Duration_Sync_Bool", false, "RU Fire Rate = Duration", "<color=#f51b1b>Ignore those fire rate setups.</color> Always set the current Ramp Up's fire rate to that of Ramp Up Buff Duration.");
 
 
-            this.ModData.AddConfigValue("Ramp Up Fire Rate Settings", "about_final", "<color=#f51b1b>The game must be restarted after setting then saving this config to take effect.</color>\n");
+            this.ModData.AddConfigHeader("Ramp Up All Settings", "Ramp Up All Settings");
+            this.ModData.AddConfigValue("Ramp Up All Settings", "RU_Apply_To_All_Bool", false, "Apply RU To ALL Guns", "This only applies to you. <color=#f51b1b>Apply Ramp Up to All Guns.</color> DAKKA FOR DAKKA GOD.");
+
+
+            this.ModData.AddConfigValue("Ramp Up All Settings", "about_final", "<color=#f51b1b>The game must be restarted after setting then saving this config to take effect.</color>\n");
             this.ModData.RegisterModConfigData(ModName);
         }
 

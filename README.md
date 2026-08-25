@@ -14,6 +14,10 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3601102970
 
 Changelog:
 
+v1.03:
+
+After looking at current state of workshop. I have realized that no sane person would make ramp up rocket launcher. And never will. So I have added option to proc ramp up on every ranged weapon. This only applies to you.
+
 v1.02:
 
 I had better idea. Just set Fire Rate = Duration of Ramp Up. Such option is also added.

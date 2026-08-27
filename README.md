@@ -14,6 +14,11 @@ https://steamcommunity.com/sharedfiles/filedetails/?id=3601102970
 
 Changelog:
 
+
+v1.04:
+
+I didn't put a check in script. Now guns will not have ramp up if MCM config say it shouldn't.
+
 v1.03:
 
 After looking at current state of workshop. I have realized that no sane person would make ramp up rocket launcher. And never will. So I have added option to proc ramp up on every ranged weapon. This only applies to you.

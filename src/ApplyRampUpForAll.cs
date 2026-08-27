@@ -23,7 +23,7 @@ namespace MoreRampUp
         {
             WeaponComponent weaponComponent = __instance.CreatureData.Inventory.CurrentWeapon.Comp<WeaponComponent>();
             int ammoValue;
-            if (!isMeleeAttack && !ItemTraitSystem.TryGetValue<int>(weaponComponent.Traits, "IRampUpProjectiles", out ammoValue))
+            if (RU_Apply_To_All_Bool && !isMeleeAttack && !ItemTraitSystem.TryGetValue<int>(weaponComponent.Traits, "IRampUpProjectiles", out ammoValue))
             {
                 __instance.CreatureData.EffectsController.Add(new RampUpShotEffect(1, 2), true);
             }
